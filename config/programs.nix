@@ -13,5 +13,7 @@
     pamixer
     libnotify
     zoom-us
+
+    openscad
   ];
 }

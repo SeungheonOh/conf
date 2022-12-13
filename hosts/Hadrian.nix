@@ -43,9 +43,15 @@
   networking.hostName = "Hadrian";
   time.timeZone = "America/Chicago";
 
+  services.xserver.videoDrivers = [ "intel" ];
+
   sound.enable = true;
   hardware = {
     pulseaudio.enable = true;
-    opengl.driSupport32Bit = true;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
   };
 }

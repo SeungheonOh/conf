@@ -25,6 +25,21 @@
     in
       fup.lib.mkFlake {
         inherit self inputs;
+
+        channels.nixpkgs.overlaysBuilder = channels: [
+          (final: prev:
+            {
+              mpfr = prev.mpfr.overrideAttrs (old: {
+                patches = (old.patches or []) ++ [
+                  ./overlays/mpfr_4.1.1.patch
+                ];
+              });
+            })
+          (final: prev: {
+            # inherit (channels.nixpkgs-21_11) mpfr prusa-slicer openscad;
+          })
+        ];
+
         channelsConfig.allowUnfree = true;
         supportedSystems = [ "x86_64-linux" ];
 
