@@ -56,6 +56,12 @@ in
 
     bash = {
       enable = true;
+      shellAliases = {
+        nr = "nix run";
+        nfl = "nix flake lock";
+        nfu = "nix flake update";
+        nd = "nix develop";
+      };
       bashrcExtra = ''
         if [ $SHLVL -ne 1 ]; then
           export PS1="[$SHLVL] \W $ "

@@ -23,5 +23,7 @@
   programs.gnome-terminal.enable = true;
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
+    gnomeExtensions.openweather
+    gnomeExtensions.vertical-overview
   ];
 }

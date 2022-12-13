@@ -8,7 +8,6 @@
     firefox
     dmenu
     acpi
-    alacritty
     brightnessctl
     pavucontrol
     pamixer

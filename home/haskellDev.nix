@@ -11,16 +11,16 @@
       '';
     };
     packages = with pkgs; [
-      # haskell.packages.ghc925.ghc
-      # haskell.packages.ghc925.QuickCheck
+      haskell.packages.ghc925.ghc
+      haskell.packages.ghc925.QuickCheck
 
-      # haskellPackages.stack
-      # haskellPackages.cabal2nix
-      # haskellPackages.cabal-install
-      # haskellPackages.hoogle
-      # haskellPackages.implicit-hie
-      # haskellPackages.nix-tree
-      # haskellPackages.ghcid
+      haskellPackages.stack
+      haskellPackages.cabal2nix
+      haskellPackages.cabal-install
+      haskellPackages.hoogle
+      haskellPackages.implicit-hie
+      haskellPackages.nix-tree
+      haskellPackages.ghcid
 
       ripgrep
       git
