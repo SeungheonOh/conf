@@ -15,5 +15,6 @@
     zoom-us
 
     openscad
+    prusa-slicer
   ];
 }
