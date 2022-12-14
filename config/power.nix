@@ -15,5 +15,9 @@
     upower.enable = true;
 
     acpid.enable = true;
+
+    logind = {
+      lidSwitch = "hibernate";
+    };
   };
 }
