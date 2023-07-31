@@ -15,6 +15,7 @@ let
     # Not shared
     ./config/docker.nix
     ./config/gnome.nix
+    ./config/kde.nix    
   ];
 
   homeModules = exportModules [

@@ -13,6 +13,16 @@
     pamixer
     libnotify
     zoom-us
+    killall
+
+    chromium
+
+    jq
+    flameshot
+
+    easyeffects
+
+    cachix
 
     openscad
     prusa-slicer

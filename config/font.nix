@@ -8,6 +8,9 @@
       unifont
       iosevka
       mononoki
+      comic-mono
+      bqn386
+      cozette
 
       nanum-gothic-coding
       noto-fonts-cjk

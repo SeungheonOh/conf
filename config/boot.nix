@@ -6,6 +6,6 @@
       efi.canTouchEfiVariables = true;
       timeout = 5;
     };
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
   };
 }

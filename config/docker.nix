@@ -3,10 +3,7 @@
   virtualisation.docker = {
     autoPrune.enable = true;
     enable = true;
-    enableOnBoot = false;
+    enableOnBoot = true;
     liveRestore = false;
   };
-
-  virtualisation.podman.enable = true;
-  virtualisation.containers.registries.search = [ "docker.io"
 }

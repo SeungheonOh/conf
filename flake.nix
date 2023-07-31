@@ -40,6 +40,42 @@
           home-manager.nixosModules.home-manager
         ] ++ modules.sharedModules;
 
+	      hosts.Mars.modules = with modules.configModules; [
+	        ./hosts/Mars.nix
+
+	        gnome
+          docker
+          ({config, pkgs, lib, ...}: {
+            services.printing.enable = true;
+            services.printing.drivers = with pkgs; [ hplip ];
+            services.avahi.enable = true;
+            services.avahi.openFirewall = true;
+            services.flatpak.enable = true;
+            networking.firewall.allowedTCPPorts = [ 8384 22000 ];
+            networking.firewall.allowedUDPPorts = [ 22000 21027 ];
+            services = {
+              syncthing = {
+                enable = true;
+                user = "sho";
+                dataDir = "/home/sho/Logseq";
+                configDir = "/home/sho/.config/syncthing";
+                overrideDevices = true;
+                overrideFolders = true;
+
+                folders = {
+                  "Logseq" = {
+                    path = "/home/sho/Logseq";
+                  };
+                };
+              };
+            };
+          })
+	      ] ++ (modules.loadHome "sho" (with modules.homeModules; [
+          haskellDev
+          pursDev
+          agdaDev
+        ]));
+
         hosts.Hadrian.modules = with modules.configModules;  [
           kmonad.nixosModules.default
           ./hosts/Hadrian.nix

@@ -5,7 +5,7 @@
     displayManager = {
       gdm.enable = true;
       autoLogin = {
-        enable = true;
+        enable = false;
         user = "sho";
       };
     };
@@ -24,6 +24,6 @@
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
     gnomeExtensions.openweather
-    gnomeExtensions.vertical-overview
+    gnomeExtensions.vertical-workspaces
   ];
 }
