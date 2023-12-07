@@ -86,6 +86,7 @@ with lib;
 
       rclone
       jetbrains.datagrip
+      amberol
     ];
   };
 }

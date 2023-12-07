@@ -5,17 +5,19 @@ let
     # Nix Configuration (shared)
     ./config/boot.nix
     ./config/font.nix
-    ./config/input.nix
     ./config/nix.nix
     ./config/programs.nix
     ./config/network.nix
     ./config/power.nix
     ./config/sho.nix
+    ./config/udev.nix
 
     # Not shared
+    ./config/input.nix
     ./config/docker.nix
     ./config/gnome.nix
-    ./config/kde.nix    
+    ./config/kde.nix
+    ./config/ddns.nix
   ];
 
   homeModules = exportModules [
@@ -42,10 +44,10 @@ rec {
     # config
     boot
     font
-    input
     programs
     nix
     network
+    udev
     sho
   ] ++ (loadHome "sho" (with homeModules; [
     common

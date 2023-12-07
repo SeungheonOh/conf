@@ -43,17 +43,48 @@
 	      hosts.Mars.modules = with modules.configModules; [
 	        ./hosts/Mars.nix
 
+          input
 	        gnome
           docker
+          ddns
           ({config, pkgs, lib, ...}: {
             services.printing.enable = true;
             services.printing.drivers = with pkgs; [ hplip ];
             services.avahi.enable = true;
             services.avahi.openFirewall = true;
             services.flatpak.enable = true;
-            networking.firewall.allowedTCPPorts = [ 8384 22000 ];
-            networking.firewall.allowedUDPPorts = [ 22000 21027 ];
+            services.tailscale.enable = true;
+            services.radarr = {
+              enable = true;
+              group = "lidarr";
+            };
+            services.jellyfin = {
+              enable = false;
+              group = "lidarr";
+            };
+            networking.firewall.allowedTCPPorts = [ 8384 22000 8096 ];
+            networking.firewall.allowedUDPPorts = [ 22000 21027 51820 ];
+            services.xrdp.enable = true;
+            services.xrdp.defaultWindowManager = "${pkgs.icewm}/bin/icewm";
+            services.xrdp.openFirewall = true;
+            virtualisation.libvirtd.enable = true;
+            programs.dconf.enable = true;
+
+            environment.etc."X11/Xwrapper.config".text = ''
+              allowed_users=anybody
+            '';
+
+
+            users.groups.lidarr = {};
+            users.users."sho".openssh.authorizedKeys.keys = [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOj5NShZ/AYRgNXKWU6sa4m/r3bFY0PoCIzPf1L1r7my sho@Mars"
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO6EpFDyBYtuGALqHyoOJ71HB72Ecn+IFFsDoRCiABAn sho@Hadrian"
+            ];
             services = {
+              openssh = {
+                enable = true;
+                settings.PasswordAuthentication = false;
+              };
               syncthing = {
                 enable = true;
                 user = "sho";

@@ -6,4 +6,6 @@
     enableOnBoot = true;
     liveRestore = false;
   };
+
+  virtualisation.libvirtd.enable = true;
 }

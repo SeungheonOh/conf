@@ -25,5 +25,6 @@
     gnome.gnome-tweaks
     gnomeExtensions.openweather
     gnomeExtensions.vertical-workspaces
+    gnome.gnome-boxes
   ];
 }

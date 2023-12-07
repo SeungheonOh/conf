@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 {
+  programs.mosh.enable = true;
   environment.systemPackages = with pkgs; [
     mg
     emacs
@@ -26,5 +27,18 @@
 
     openscad
     prusa-slicer
+    insomnia
+    ngrok
+
+    texlive.combined.scheme-full
+
+    wineWowPackages.stable
+    winetricks
+    wineWowPackages.waylandFull
+    virtmanager
+    etcher
+
+    vscodium
+    (python3.withPackages(ps: with ps; [ pandas matplotlib numpy jupyter ]))
   ];
 }

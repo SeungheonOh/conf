@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
 {
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-12.2.3"
+  ];
+
   system.stateVersion = "22.11";
   nix = {
     package = pkgs.nixVersions.unstable;
