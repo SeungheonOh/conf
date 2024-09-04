@@ -10,4 +10,6 @@
     dhcpcd.extraConfig = "noarp";
   };
   systemd.services.NetworkManager-wait-online.enable = false;
+
+  services.tailscale.enable = true;
 }

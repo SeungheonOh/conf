@@ -16,8 +16,10 @@ let
     ./config/input.nix
     ./config/docker.nix
     ./config/gnome.nix
+    ./config/sway.nix
     ./config/kde.nix
     ./config/ddns.nix
+    ./config/bluetooth.nix
   ];
 
   homeModules = exportModules [
@@ -28,6 +30,9 @@ let
     ./home/haskellDev.nix
     ./home/pursDev.nix
     ./home/agdaDev.nix
+    ./home/lispDev.nix
+    ./home/racketDev.nix
+    ./home/typescriptDev.nix
   ];
 in
 rec {

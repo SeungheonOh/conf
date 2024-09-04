@@ -3,7 +3,7 @@
   fonts = {
     fontDir.enable = true;
     fontconfig.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       victor-mono
       unifont
       iosevka

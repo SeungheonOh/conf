@@ -107,19 +107,34 @@
           agdaDev
         ]));
 
-        hosts.Hadrian.modules = with modules.configModules;  [
+        hosts.Nerva.modules = with modules.configModules;  [
           kmonad.nixosModules.default
-          ./hosts/Hadrian.nix
+          ./hosts/Nerva.nix
 
+          input
+          docker
           power
-          gnome
+          # gnome
+          sway
+          bluetooth
           {
+            home-manager.backupFileExtension = "backup";
+            hardware.opengl.enable = true;
+            networking.firewall.allowedTCPPorts = [ 3389 ];
+            networking.firewall.allowedUDPPorts = [ 3389 ];
+
+            time.timeZone = "America/Chicago";
+  	        boot.initrd.luks.devices.luksroot = {
+	            device = "/dev/disk/by-uuid/9438384c-f41b-4191-bd61-ced2b80360c9";
+	            preLVM = true;
+	            allowDiscards = true;
+	          };
             services.kmonad = {
               enable = true;
 
               keyboards.internal = {
                 device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-                config = builtins.readFile ./keyboard/thinkpad_internal.kbd;
+                config = builtins.readFile ./keyboard/framework13.kbd;
 
                 defcfg = {
                   enable = true;
@@ -131,8 +146,11 @@
           }
         ] ++ (modules.loadHome "sho" (with modules.homeModules; [
           haskellDev
-          pursDev
+          #          pursDev
           agdaDev
+          lispDev
+          racketDev
+          typescriptDev
         ]));
       };
 }

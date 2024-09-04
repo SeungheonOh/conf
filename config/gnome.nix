@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }:{
   services.xserver = {
     enable = true;
     displayManager = {
@@ -22,9 +21,10 @@
   programs.dconf.enable = true;
   programs.gnome-terminal.enable = true;
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
+    gnome-tweaks
     gnomeExtensions.openweather
     gnomeExtensions.vertical-workspaces
     gnome.gnome-boxes
+    google-cursor
   ];
 }

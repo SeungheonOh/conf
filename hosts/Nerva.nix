@@ -8,39 +8,36 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/83a8f9a8-5abf-4b8c-9cec-d3b65f98aba2";
+    { device = "/dev/disk/by-uuid/3fb4759e-a6c6-409f-8810-1ffe3c6e91e1";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3F28-9601";
+    { device = "/dev/disk/by-uuid/BE41-E4A1";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/985b5bb0-d1b6-40a3-9a65-6cf3bb1f7af9"; }
+    [ { device = "/dev/disk/by-uuid/47f774bc-ab5f-426f-ba0d-ebab175271a9"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunctiok
+  # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s20f0u3.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp170s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  networking.hostName = "Mars";
-  time.timeZone = "America/Chicago";
+  networking.hostName = "Nerva";
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -60,8 +57,8 @@
     pulseaudio.enable = false;
     opengl = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      #driSupport = true;
+      #driSupport32Bit = true;
     };
   };
 }

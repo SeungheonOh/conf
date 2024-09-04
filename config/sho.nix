@@ -2,6 +2,6 @@
 {
   users.users.sho = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "networkmanager" "video" "dialout" "tty" "docker" "plugdev" "lidarr" ];
+    extraGroups = [ "wheel" "audio" "networkmanager" "video" "dialout" "tty" "docker" "plugdev" "lidarr" "input" ];
   };
 }
