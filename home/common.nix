@@ -39,6 +39,7 @@ with lib;
         c = "clear";
       };
       bashrcExtra = ''
+        eval "$(jump shell)"
         if command -v fzf-share >/dev/null; then
           source "$(fzf-share)/key-bindings.bash"
           source "$(fzf-share)/completion.bash"
@@ -146,6 +147,7 @@ with lib;
       rclone
       jetbrains.datagrip
       amberol
+      jump
     ];
   };
 }

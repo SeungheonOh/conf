@@ -11,7 +11,10 @@
     playerctl
     pulseaudio
     waybar
+    nautilus
   ];
+
+  services.gvfs.enable = true;
 
   xdg = {
     portal = {
@@ -22,6 +25,10 @@
 
   programs.gnupg.agent = {
     enable = true;
+    settings = {
+      allow-emacs-pinentry = "";
+      allow-loopback-pinentry = "";
+    };
     pinentryPackage = pkgs.pinentry-tty;
     enableSSHSupport = true;
   };
@@ -36,6 +43,9 @@
       default_session = initial_session;
     };
   };
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
 
   environment.etc."greetd/environments".text = ''
     sway
@@ -60,6 +70,7 @@
     targets.network-online.wantedBy = pkgs.lib.mkForce []; # Normally ["multi-user.target"]
     services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce []; # Normally ["network-online.target"]
     services."tailscaled".wantedBy = pkgs.lib.mkForce [];
+    services."expressvpn".wantedBy = pkgs.lib.mkForce [];
     services."docker".wantedBy = pkgs.lib.mkForce [];
     services."firewall".wantedBy = pkgs.lib.mkForce [];
     services."libvirtd".wantedBy = pkgs.lib.mkForce [];

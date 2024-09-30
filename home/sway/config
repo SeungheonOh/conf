@@ -17,6 +17,7 @@ set $right f
 set $term alacritty
 # Your preferred application launcher
 set $menu rofi -combi-modes drun#window -show combi -font "Comic Mono 19"
+focus_on_window_activation focus
 
 seat seat0 xcursor_theme GoogleDot-Black
 font pango:Comic Mono 15
@@ -100,7 +101,7 @@ bindsym $mod+Shift+q kill
 # Start your launcher
 bindsym $mod+d exec $menu
 
-bindsym $mod+Shift+l exec brightnessctl -s && brightnessctl set 0 && swaylock && brightnessctl -r
+bindsym $mod+Shift+l exec /home/sho/.config/sway/lock.sh
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -126,11 +127,21 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+bindsym $mod+m focus left
+bindsym $mod+n focus down
+bindsym $mod+e focus up
+bindsym $mod+i focus right
+
 # Ditto, with arrow keys
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+bindsym $mod+Control+Shift+Right move workspace to output right
+bindsym $mod+Control+Shift+Left move workspace to output left
+bindsym $mod+Control+Shift+Down move workspace to output down
+bindsym $mod+Control+Shift+Up move workspace to output up
 #
 # Workspaces:
 #
@@ -164,16 +175,25 @@ bindsym $mod+Shift+0 move container to workspace number 10
 # You can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
-# bindsym $mod+b splith
-# bindsym $mod+v splitv
+bindsym $mod+h splith
+bindsym $mod+v splitv
+
+mode "split" {
+bindsym $mod+1 fullscreen; mode "default"
+bindsym $mod+2 splitv; mode "default"
+bindsym $mod+3 splith; mode "default"
+bindsym Return mode "default"
+bindsym Escape mode "default"
+}
+
+bindsym $mod+x mode "split"
 
 # Switch the current container between different layout styles
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+t layout tabbed
+bindsym $mod+s layout toggle split
 
 # Make the current focus fullscreen
-bindsym $mod+f fullscreen
+# bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
@@ -199,22 +219,16 @@ bindsym $mod+minus scratchpad show
 # Resizing containers:
 #
 mode "resize" {
-# left will shrink the containers width
-# right will grow the containers width
-# up will shrink the containers height
-# down will grow the containers height
 bindsym $left resize shrink width 10px
 bindsym $down resize grow height 10px
 bindsym $up resize shrink height 10px
 bindsym $right resize grow width 10px
 
-# Ditto, with arrow keys
 bindsym Left resize shrink width 10px
 bindsym Down resize grow height 10px
 bindsym Up resize shrink height 10px
 bindsym Right resize grow width 10px
 
-# Return to default mode
 bindsym Return mode "default"
 bindsym Escape mode "default"
 }
