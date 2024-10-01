@@ -40,30 +40,22 @@
           home-manager.nixosModules.home-manager
         ] ++ modules.sharedModules;
 
-	      hosts.Mars.modules = with modules.configModules; [
-	        ./hosts/Mars.nix
+        hosts.Trajan.modules = with modules.configModules; [
+          ./hosts/Trajan.nix
 
           input
-	        gnome
+	  gnome
           docker
           ddns
+	  network
+	  bluetooth
           ({config, pkgs, lib, ...}: {
-            services.printing.enable = true;
-            services.printing.drivers = with pkgs; [ hplip ];
             services.avahi.enable = true;
             services.avahi.openFirewall = true;
             services.flatpak.enable = true;
             services.tailscale.enable = true;
-            services.radarr = {
-              enable = true;
-              group = "lidarr";
-            };
-            services.jellyfin = {
-              enable = false;
-              group = "lidarr";
-            };
-            networking.firewall.allowedTCPPorts = [ 8384 22000 8096 ];
-            networking.firewall.allowedUDPPorts = [ 22000 21027 51820 ];
+            networking.firewall.allowedTCPPorts = [ 22 8384 22000 8096 ];
+            networking.firewall.allowedUDPPorts = [ 22 22000 21027 51820 ];
             services.xrdp.enable = true;
             services.xrdp.defaultWindowManager = "${pkgs.icewm}/bin/icewm";
             services.xrdp.openFirewall = true;
@@ -76,14 +68,10 @@
 
 
             users.groups.lidarr = {};
-            users.users."sho".openssh.authorizedKeys.keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOj5NShZ/AYRgNXKWU6sa4m/r3bFY0PoCIzPf1L1r7my sho@Mars"
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO6EpFDyBYtuGALqHyoOJ71HB72Ecn+IFFsDoRCiABAn sho@Hadrian"
-            ];
             services = {
               openssh = {
                 enable = true;
-                settings.PasswordAuthentication = false;
+                settings.PasswordAuthentication = true;
               };
               syncthing = {
                 enable = true;

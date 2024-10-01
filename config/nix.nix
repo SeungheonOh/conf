@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-  system.stateVersion = "22.11";
+  system.stateVersion = "24.05"; # Did you read the comment?
   nix = {
     package = pkgs.nixVersions.latest;
     optimise.automatic = true;

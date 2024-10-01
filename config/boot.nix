@@ -15,7 +15,7 @@
       "udev.log_priority=3"
     ];
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot.enable = false;
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
