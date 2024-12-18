@@ -19,7 +19,24 @@ set $term alacritty
 set $menu rofi -combi-modes drun#window -show combi -font "Comic Mono 19"
 focus_on_window_activation focus
 
-seat seat0 xcursor_theme GoogleDot-Black
+set $cursorTheme GoogleDot-Black
+set $cursorSize 45
+set $gnomeSchema org.gnome.desktop.interface
+set $systemDpiScalingFactor 1.5
+
+exec {
+  /home/sho/Documents/wlsunset/setgamma
+}
+
+exec_always {
+  # gsettings set $gnomeSchema gtk-theme $system_theme
+  # gsettings set $gnomeSchema icon-theme $system_icons
+  gsettings set $gnomeSchema text-scaling-factor $systemDpiScalingFactor
+  gsettings set $gnomeSchema cursor-theme $cursorTheme
+  gsettings set $gnomeSchema cursor-size $cursorSize
+}
+
+seat seat0 xcursor_theme $cursorTheme $cursorSize
 font pango:Comic Mono 15
 
 exec_always {
@@ -42,13 +59,14 @@ libinput-gestures -c ~/.config/sway/libinput-gestures.conf &
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg ~/Pictures/bg/out.jpg tile
+#output * bg ~/Pictures/bg/out.jpg tile
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+# output eDP-1 resolution 2944x1840 scale 1.2
 
 ### Idle configuration
 #
@@ -75,7 +93,7 @@ output * bg ~/Pictures/bg/out.jpg tile
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
+input "1739:52992:hid-over-i2c_06CB:CF00_Touchpad" {
 accel_profile adaptive
 drag enabled
 dwt enabled

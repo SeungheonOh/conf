@@ -13,7 +13,7 @@
       cozette
 
       nanum-gothic-coding
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
 
       noto-fonts-emoji
     ];

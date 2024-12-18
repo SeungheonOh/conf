@@ -1,14 +1,13 @@
 { config, lib, pkgs, ... }:
 {
   services.udev.packages = with pkgs; [
-    via
   ];
   programs.mosh.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
-  programs.steam.enable = true;
+  #programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     mg
     emacs
@@ -21,7 +20,7 @@
     pavucontrol
     pamixer
     libnotify
-    zoom-us
+#    zoom-us -- figure out how to deal with this elegantly
     killall
 
     chromium
@@ -34,17 +33,9 @@
     cachix
 
     openscad
-    prusa-slicer
-    insomnia
-    ngrok
 
     texlive.combined.scheme-full
     texlive.bin.pygmentex
-
-    wineWowPackages.stable
-    winetricks
-    wineWowPackages.waylandFull
-    virt-manager
 
     gnupg
     pinentry
@@ -52,16 +43,9 @@
 
     doppler
 
-    nyxt
-
-    via
-
-    vscodium
     (python3.withPackages(ps: with ps; [ pandas matplotlib numpy jupyter ]))
 
     telegram-desktop
-    nuclear
-    spotify
 
     alacritty
   ];

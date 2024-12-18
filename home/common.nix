@@ -71,6 +71,7 @@ with lib;
     alacritty = {
       enable = true;
       settings = {
+        selection."save_to_clipboard" = true;
         colors.normal ={
           black = "#f2f2f2";
           red = "#a60000";
@@ -132,21 +133,20 @@ with lib;
       vlc
       feh
       nixfmt
-      slack
-      discord
+#      slack -- figure out how to deal with this elegantly
+#      discord
       (hunspellWithDicts (with hunspellDicts; [en-us-large]))
       mtm
 
-      logseq
-      obsidian
+#      logseq
+#      obsidian
 
-      pgadmin
+#      pgadmin
       tor
       inkscape
 
       rclone
-      jetbrains.datagrip
-      amberol
+#      jetbrains.datagrip
       jump
     ];
   };

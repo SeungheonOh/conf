@@ -49,8 +49,8 @@
 /* The whole bar */
 #waybar {
     /* background: #323232;*/
-background-color: rgba(0,0,0,0);
-    color: #222222;
+    background-color: rgba(0,0,0,0);
+    color: #eeeeee;
     font-family: Comic Mono;
     font-size: 20px;
 }
@@ -191,13 +191,12 @@ background-color: rgba(0,0,0,0);
     padding-bottom: 2px;
     padding-left: 10px;
     padding-right: 10px;
-    color: #222222;
+    color: #dddddd;
 }
 
 #workspaces button.focused {
-    border-color: #4c7899;
     color: white;
-    background-color: #285577;
+    background-color: #222244;
 }
 
 #workspaces button.urgent {

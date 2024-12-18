@@ -3,7 +3,6 @@ with fup.lib;
 let
   configModules = exportModules [
     # Nix Configuration (shared)
-    ./config/boot.nix
     ./config/font.nix
     ./config/nix.nix
     ./config/programs.nix
@@ -13,6 +12,7 @@ let
     ./config/udev.nix
 
     # Not shared
+    ./config/boot.nix    
     ./config/input.nix
     ./config/docker.nix
     ./config/gnome.nix
@@ -47,7 +47,6 @@ rec {
 
   sharedModules = with configModules; [
     # config
-    boot
     font
     programs
     nix

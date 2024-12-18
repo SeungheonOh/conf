@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:{
+  programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     grim # screenshot functionality
     slurp # screenshot functionality
@@ -12,6 +13,9 @@
     pulseaudio
     waybar
     nautilus
+
+    glib
+    gsettings-desktop-schemas
   ];
 
   services.gvfs.enable = true;
@@ -19,7 +23,6 @@
   xdg = {
     portal = {
       enable = true;
-      gtkUsePortal = true;
     };
   };
 
@@ -36,10 +39,19 @@
   services.greetd = {
     enable = true;
     settings = rec {
-      initial_session = {
-        command = "${pkgs.sway}/bin/sway";
-        user = "sho";
-      };
+      initial_session =
+        let
+          schema = pkgs.gsettings-desktop-schemas;
+          datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+        in {
+          command = ''
+            #silly
+            export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+            ${pkgs.xdg-desktop-portal-gtk}/libexec/xdg-desktop-portal-gtk &
+            ${pkgs.sway}/bin/sway
+          '';
+          user = "sho";
+        };
       default_session = initial_session;
     };
   };
@@ -55,7 +67,10 @@
   # enable sway window manager
   programs.sway = {
     enable = true;
-    wrapperFeatures.gtk = true;
+    wrapperFeatures = {
+      base = true;
+      gtk = true;
+    };
   };
 
   systemd.user.services.kanshi = {
@@ -66,13 +81,5 @@
     };
   };
 
-  systemd = {
-    targets.network-online.wantedBy = pkgs.lib.mkForce []; # Normally ["multi-user.target"]
-    services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce []; # Normally ["network-online.target"]
-    services."tailscaled".wantedBy = pkgs.lib.mkForce [];
-    services."expressvpn".wantedBy = pkgs.lib.mkForce [];
-    services."docker".wantedBy = pkgs.lib.mkForce [];
-    services."firewall".wantedBy = pkgs.lib.mkForce [];
-    services."libvirtd".wantedBy = pkgs.lib.mkForce [];
-  };
+  systemd.targets.network-online.wantedBy = [];
 }
